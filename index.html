@@ -325,7 +325,7 @@
     const oppForm = document.getElementById('opp-form');
     const oppBtn = oppForm.querySelector('button[type="submit"]');
     oppBtn.dataset.label = 'Request Access';
-    oppForm.addEventListener('submit', function(e) { e.preventDefault(); submitToHubSpot(oppForm, oppBtn, document.getElementById('opp-success'), document.getElementById('opp-error'), [{ name: 'hs_lead_status', value: 'Opportunities Request' }]); });
+    oppForm.addEventListener('submit', function(e) { e.preventDefault(); submitToHubSpot(oppForm, oppBtn, document.getElementById('opp-success'), document.getElementById('opp-error'), [{ name: 'hs_lead_status', value: 'Opportunities Request' }], 'https://proxima-portal.onrender.com/portal'); });
   </script>
 </body>
 </html>
