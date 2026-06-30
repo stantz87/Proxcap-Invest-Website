@@ -306,7 +306,7 @@
     function closeMobileMenu() { document.getElementById('nav-mobile-menu').classList.remove('open'); }
     const HS_PORTAL = '147236287';
     const HS_FORM = '10f3a58a-8fc4-4759-b414-15e36501a79c';
-    async function submitToHubSpot(formEl, btnEl, successEl, errorEl, extraFields) {
+    async function submitToHubSpot(formEl, btnEl, successEl, errorEl, extraFields, redirectUrl) {
       btnEl.textContent = 'Sending...'; btnEl.disabled = true;
       const fd = new FormData(formEl);
       const fields = [...fd.entries()].map(([name, value]) => ({ name, value }));
