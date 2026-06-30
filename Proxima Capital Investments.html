@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Proxima Capital Investments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dark: #085454;
+      --dark-deep: #053a3a;
+      --accent: #01C977;
+      --paper: #ffffff;
+      --paper-2: #E6E7E8;
+      --ink: #000000;
+      --ink-soft: #535353;
+      --cream: #ffffff;
+      --cream-soft: rgba(255,255,255,0.75);
+      --line: rgba(0,0,0,0.13);
+      --line-dark: rgba(255,255,255,0.18);
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--accent); color: #000; }
+    input, textarea, button, select { font-family: inherit; }
+    input::placeholder, textarea::placeholder { color: rgba(0,0,0,0.32); }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(24px, 6vw, 96px);
+      height: 66px;
+    }
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .nav-logo-primary {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+    .nav-logo-sub {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(20px, 3vw, 44px);
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--cream-soft);
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cream); }
+    .nav-cta {
+      background: var(--accent);
+      color: #000 !important;
+      padding: 8px 20px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* HERO */
+    #top {
+      scroll-margin-top: 66px;
+      min-height: 100vh;
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: clamp(100px, 16vh, 180px) clamp(24px, 6vw, 96px) clamp(80px, 12vh, 140px);
+      gap: clamp(40px, 6vw, 96px);
+    }
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--cream-soft);
+      margin-bottom: 28px;
+    }
+    .hero-title {
+      font-size: clamp(38px, 5vw, 72px);
+      font-weight: 700;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+    .hero-title span { color: var(--accent); }
+    .hero-sub {
+      font-size: clamp(16px, 1.4vw, 20px);
+      color: var(--cream-soft);
+      line-height: 1.6;
+      margin-bottom: 44px;
+      max-width: 480px;
+    }
+    .hero-stats {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+    }
+    .hero-stat {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .hero-stat-divider {
+      color: var(--line-dark);
+      font-size: 14px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream-soft);
+      border: 1px solid var(--line-dark);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 15px 36px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--cream); border-color: rgba(255,255,255,0.4); }
+    .hero-image {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line-dark);
+      aspect-ratio: 4/3;
+    }
+
+    /* APPROACH */
+    #approach {
+      scroll-margin-top: 66px;
+      background: var(--paper);
+      padding: clamp(80px, 13vh, 150px) clamp(24px, 6vw, 96px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 7vw, 100px);
+      align-items: center;
+    }
+    .chart-wrap {
+      background: #f9fafb;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 32px 28px 24px;
+    }
+    .chart-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 4px;
+    }
+    .chart-subtitle {
+      font-size: 12px;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 24px;
+    }
+    .chart-legend {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+    .legend-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    @media (max-width: 768px) { #approach { grid-template-columns: 1fr; } }
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 22px;
+    }
+    .section-heading {
+      font-size: clamp(28px, 3.5vw, 48px);
+      font-weight: 700;
+      line-height: 1.08;
+      color: var(--ink);
+      margin-bottom: 28px;
+      max-width: 700px;
+      letter-spacing: -0.01em;
+    }
+    .section-body {
+      font-size: clamp(16px, 1.3vw, 19px);
+      color: var(--ink-soft);
+      line-height: 1.75;
+      max-width: 800px;
+    }
+
+    /* WHY */
+    #why {
+      scroll-margin-top: 66px;
+      background: var(--dark);
+      padding: clamp(80px, 13vh, 150px) clamp(24px, 6vw, 96px);
+    }
+    #why { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(48px, 7vw, 100px); align-items: start; }
+    #why .section-label { color: var(--cream-soft); }
+    #why .section-heading { font-size: clamp(36px, 4.5vw, 62px); color: var(--cream); }
+    #why .section-body { font-size: clamp(15px, 1.2vw, 17px); color: rgba(255,255,255,0.72); }
+    .why-paragraphs { display: flex; flex-direction: column; gap: 22px; }
+    .why-stats { display: flex; flex-direction: column; gap: 0; padding-top: 8px; }
+    .why-stat-item { border-top: 1px solid var(--line-dark); padding: 28px 0; }
+    .why-stat-item:last-child { border-bottom: 1px solid var(--line-dark); }
+    .why-stat-number { font-size: clamp(40px, 5vw, 68px); font-weight: 700; color: var(--accent); line-height: 1; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .why-stat-label { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-soft); margin-bottom: 4px; }
+    .why-stat-desc { font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
+    /* CONTACT */
+    #contact {
+      scroll-margin-top: 66px;
+      background: var(--paper-2);
+      padding: clamp(80px, 13vh, 150px) clamp(24px, 6vw, 96px);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: clamp(44px, 6vw, 96px);
+    }
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+    .form-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    .form-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--line);
+      padding: 10px 0;
+      font-size: 16px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-input:focus { border-bottom-color: var(--dark); }
+    textarea.form-input { resize: vertical; min-height: 100px; }
+    .form-success { display: none; font-size: 16px; color: var(--dark); margin-top: 16px; line-height: 1.5; }
+    .form-error { display: none; font-size: 15px; color: #c0392b; margin-top: 12px; }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark-deep);
+      color: var(--cream-soft);
+      padding: 36px clamp(24px, 6vw, 96px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer p { font-size: 13px; letter-spacing: 0.04em; }
+
+    /* MODAL */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(8,84,84,0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--paper);
+      max-width: 540px;
+      width: 100%;
+      padding: clamp(36px, 5vw, 60px);
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px; right: 24px;
+      background: none; border: none;
+      font-size: 24px; cursor: pointer;
+      color: var(--ink-soft); line-height: 1;
+    }
+    .modal-close:hover { color: var(--ink); }
+    .modal-label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 14px; }
+    .modal-heading { font-size: clamp(24px, 3vw, 36px); font-weight: 700; line-height: 1.1; margin-bottom: 12px; }
+    .modal-sub { font-size: 15px; color: var(--ink-soft); margin-bottom: 32px; line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      #top { grid-template-columns: 1fr; }
+      .hero-image { display: none; }
+      #contact { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#top" class="nav-logo">
+      <img src="Logo 2.svg" alt="Proxima Capital" style="height:52px; width:auto; display:block;">
+    </a>
+    <div class="nav-links">
+      <a href="#" onclick="openModal(); return false;">Opportunities</a>
+      <a href="#why">Why Social Housing</a>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+    </div>
+  </nav>
+
+  <section id="top">
+    <div class="hero-content">
+      <div class="hero-label">Institutional Real Estate Investment</div>
+      <h1 class="hero-title">Proxima Capital<br><span>Investments</span></h1>
+      <p class="hero-sub">We source, structure and manage UK property investments built on long-term income, not speculation. Backed by leased social housing and quality residential assets, our deals are underwritten for stability first and yield second.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">10%+ Net Yield Target</div>
+        <div class="hero-stat-divider">|</div>
+        <div class="hero-stat">Asset-Backed Security</div>
+        <div class="hero-stat-divider">|</div>
+        <div class="hero-stat">UK-Wide Coverage</div>
+      </div>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Contact Us</a>
+        <a href="#approach" class="btn-ghost">Our Approach &rarr;</a>
+      </div>
+    </div>
+    <div class="hero-image"><img src="Terraced housing.jpg" alt="UK terraced housing" style="width:100%;height:100%;object-fit:cover;display:block;"></div>
+  </section>
+
+  <section id="approach">
+    <div>
+      <div class="section-label">Our Approach</div>
+      <h2 class="section-heading">Income-producing assets, held for the long term.</h2>
+      <p class="section-body">Proxima Capital Investments acquires residential property secured by long-term, government-backed leases. We focus on income-producing assets structured for stability and durability over time.</p>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Total Return Index</div>
+      <div class="chart-subtitle">Growth of £100 invested — 2004 to 2024</div>
+      <svg viewBox="0 0 460 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <!-- Grid lines -->
+        <line x1="40" y1="20" x2="40" y2="220" stroke="#e5e7eb" stroke-width="1"/>
+        <line x1="40" y1="220" x2="450" y2="220" stroke="#e5e7eb" stroke-width="1"/>
+        <line x1="40" y1="170" x2="450" y2="170" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <line x1="40" y1="120" x2="450" y2="120" stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <line x1="40" y1="70"  x2="450" y2="70"  stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <line x1="40" y1="20"  x2="450" y2="20"  stroke="#e5e7eb" stroke-width="0.5" stroke-dasharray="3,3"/>
+        <!-- Y axis labels -->
+        <text x="32" y="224" text-anchor="end" font-size="10" fill="#9ca3af">100</text>
+        <text x="32" y="174" text-anchor="end" font-size="10" fill="#9ca3af">150</text>
+        <text x="32" y="124" text-anchor="end" font-size="10" fill="#9ca3af">200</text>
+        <text x="32" y="74"  text-anchor="end" font-size="10" fill="#9ca3af">250</text>
+        <text x="32" y="24"  text-anchor="end" font-size="10" fill="#9ca3af">300</text>
+        <!-- X axis labels: 2004 2006 2008 2010 2012 2014 2016 2018 2020 2022 2024 -->
+        <text x="40"  y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2004</text>
+        <text x="82"  y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2006</text>
+        <text x="124" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2008</text>
+        <text x="166" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2010</text>
+        <text x="208" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2012</text>
+        <text x="250" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2014</text>
+        <text x="292" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2016</text>
+        <text x="334" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2018</text>
+        <text x="376" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2020</text>
+        <text x="418" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2022</text>
+        <text x="450" y="234" text-anchor="middle" font-size="9" fill="#9ca3af">2024</text>
+        <!-- Scale: y=220 → 100, y=20 → 300. So 1 unit = 1, range 200px for 200 units. y = 220 - (val-100) -->
+        <!-- UK Property Total Return: 100,125,138,132,138,158,188,208,222,280,295 -->
+        <polyline points="40,220 82,195 124,182 166,188 208,182 250,162 292,132 334,112 376,98 418,60 450,45"
+          fill="none" stroke="#01C977" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <!-- FTSE 100 Total Return: 100,118,96,104,118,142,152,160,138,172,182 -->
+        <polyline points="40,220 82,202 124,224 166,216 208,202 250,178 292,168 334,160 376,182 418,148 450,138"
+          fill="none" stroke="#085454" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="5,3"/>
+        <!-- Cash/Savings: 100,105,110,112,114,116,118,122,124,132,138 -->
+        <polyline points="40,220 82,210 124,200 166,196 208,192 250,188 292,184 334,176 376,172 418,156 450,148"
+          fill="none" stroke="#d1d5db" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+        <!-- End labels -->
+        <text x="454" y="48"  font-size="10" font-weight="600" fill="#01C977">£295</text>
+        <text x="454" y="141" font-size="10" fill="#085454">£182</text>
+        <text x="454" y="151" font-size="10" fill="#9ca3af">£138</text>
+      </svg>
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#01C977"></div>UK Property (total return)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#085454"></div>FTSE 100 (total return)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#d1d5db"></div>Cash savings</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div>
+      <div class="section-label">Why Social Housing</div>
+      <h2 class="section-heading">Tangible assets with contracted income.</h2>
+      <div class="why-paragraphs">
+        <p class="section-body">Social housing investment offers a rare combination of social purpose and financial resilience. With chronic undersupply pushing rents and house prices ever higher, demand for affordable, secure homes continues to outstrip what the market is delivering, creating long-term, stable demand that isn't dependent on economic cycles.</p>
+        <p class="section-body">Income is typically underpinned by long leases with housing associations or local authorities, often linked to inflation, giving investors predictable, index-linked returns alongside government-backed counterparties. At the same time, capital is directed toward addressing one of society's most pressing challenges: ensuring people have access to good-quality, affordable homes.</p>
+        <p class="section-body">For investors looking to combine dependable income, low correlation to traditional asset classes, and genuine positive impact, social housing stands out as a compelling and forward-looking opportunity.</p>
+      </div>
+    </div>
+    <div class="why-stats">
+      <div class="why-stat-item">
+        <div class="why-stat-number">1.3M</div>
+        <div class="why-stat-label">Households on waiting lists</div>
+        <div class="why-stat-desc">Over 1.3 million households are currently on social housing waiting lists across England alone.</div>
+      </div>
+      <div class="why-stat-item">
+        <div class="why-stat-number">90K</div>
+        <div class="why-stat-label">Net new homes needed annually</div>
+        <div class="why-stat-desc">The UK needs at least 90,000 new social homes per year — fewer than 10,000 are currently delivered.</div>
+      </div>
+      <div class="why-stat-item">
+        <div class="why-stat-number">8 yrs</div>
+        <div class="why-stat-label">Average wait in high-demand areas</div>
+        <div class="why-stat-desc">Families in London and the South East wait an average of 8 years for a social home.</div>
+      </div>
+      <div class="why-stat-item">
+        <div class="why-stat-number">£30B+</div>
+        <div class="why-stat-label">Annual housing benefit spend</div>
+        <div class="why-stat-desc">Government housing benefit expenditure underpins rental income across the social housing sector.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div>
+      <div class="section-label">Contact</div>
+      <h2 class="section-heading">Get in Touch</h2>
+      <p class="section-body">To learn more about Proxima Capital Investments.</p>
+    </div>
+    <div>
+      <form id="contact-form">
+        <div class="form-field">
+          <label class="form-label" for="cf-name">Name</label>
+          <input class="form-input" type="text" id="cf-name" name="firstname" required placeholder="Your name">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="cf-email">Email</label>
+          <input class="form-input" type="email" id="cf-email" name="email" required placeholder="you@firm.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="cf-msg">Message</label>
+          <textarea class="form-input" id="cf-msg" name="message" required placeholder="How can we help?"></textarea>
+        </div>
+        <button type="submit" id="submit-btn" class="btn-primary" style="margin-top:6px;">Submit Enquiry</button>
+        <p class="form-success" id="form-success">Thank you — we'll be in touch shortly.</p>
+        <p class="form-error" id="form-error">Something went wrong. Please try again or email us directly.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>Proxima Capital Investments</p>
+    <p>&copy; 2026 Proxima Capital Investments. All rights reserved.</p>
+  </footer>
+
+  <div id="opp-modal" class="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+      <div class="modal-label">Opportunities</div>
+      <h3 class="modal-heading">Request Access</h3>
+      <p class="modal-sub">Please introduce yourself and we will be in touch with access to our current opportunities.</p>
+      <form id="opp-form" action="https://formsubmit.co/james@proxcap.co" method="POST">
+        <input type="hidden" name="_subject" value="Opportunities Access Request">
+        <input type="hidden" name="_next" value="https://proxima-portal.onrender.com/portal">
+        <div class="form-field">
+          <label class="form-label" for="opp-name">Name</label>
+          <input class="form-input" type="text" id="opp-name" name="name" required placeholder="Your name">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="opp-email">Email</label>
+          <input class="form-input" type="email" id="opp-email" name="email" required placeholder="you@firm.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="opp-org">Organisation</label>
+          <input class="form-input" type="text" id="opp-org" name="organisation" placeholder="Your firm or organisation">
+        </div>
+        <button type="submit" class="btn-primary">Request Access</button>
+        <p class="form-success" id="opp-success" style="display:none;margin-top:16px;color:var(--dark);">Thank you — we'll be in touch shortly.</p>
+        <p class="form-error" id="opp-error" style="display:none;margin-top:12px;color:#c0392b;">Something went wrong. Please try again.</p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function openModal() { document.getElementById('opp-modal').classList.add('open'); }
+    function closeModal() { document.getElementById('opp-modal').classList.remove('open'); }
+
+    const HS_PORTAL = '147236287';
+    const HS_FORM   = '10f3a58a-8fc4-4759-b414-15e36501a79c';
+
+    async function submitToHubSpot(formEl, btnEl, successEl, errorEl, extraFields) {
+      btnEl.textContent = 'Sending...';
+      btnEl.disabled = true;
+      const fd = new FormData(formEl);
+      const fields = [...fd.entries()].map(([name, value]) => ({ name, value }));
+      if (extraFields) fields.push(...extraFields);
+      try {
+        const res = await fetch(
+          `https://api.hsforms.com/submissions/v3/integration/submit/${HS_PORTAL}/${HS_FORM}`,
+          { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ fields, context: { pageUri: location.href, pageName: document.title } }) }
+        );
+        if (res.ok) {
+          formEl.style.display = 'none';
+          successEl.style.display = 'block';
+        } else {
+          errorEl.style.display = 'block';
+          btnEl.textContent = btnEl.dataset.label; btnEl.disabled = false;
+        }
+      } catch {
+        errorEl.style.display = 'block';
+        btnEl.textContent = btnEl.dataset.label; btnEl.disabled = false;
+      }
+    }
+
+    const contactForm = document.getElementById('contact-form');
+    const contactBtn  = document.getElementById('submit-btn');
+    contactBtn.dataset.label = 'Submit Enquiry';
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitToHubSpot(contactForm, contactBtn,
+        document.getElementById('form-success'),
+        document.getElementById('form-error'));
+    });
+
+    const oppForm = document.getElementById('opp-form');
+    const oppBtn  = oppForm.querySelector('button[type="submit"]');
+    oppBtn.dataset.label = 'Request Access';
+    oppForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      submitToHubSpot(oppForm, oppBtn,
+        document.getElementById('opp-success'),
+        document.getElementById('opp-error'),
+        [{ name: 'hs_lead_status', value: 'Opportunities Request' }]
+      );
+    });
+  </script>
+
+</body>
+</html>
