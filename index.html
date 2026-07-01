@@ -221,17 +221,17 @@
     </div>
     <div class="why-stats">
       <div class="why-stat-item">
-        <div class="why-stat-number">1.3M</div>
+        <div class="why-stat-number" data-prefix="" data-target="1.3" data-suffix="M" data-decimals="1">1.3M</div>
         <div class="why-stat-label">Households on waiting lists</div>
         <div class="why-stat-desc">Over 1.3 million households are currently on social housing waiting lists across England alone.</div>
       </div>
       <div class="why-stat-item">
-        <div class="why-stat-number">90K</div>
+        <div class="why-stat-number" data-prefix="" data-target="90" data-suffix="K">90K</div>
         <div class="why-stat-label">Net new homes needed annually</div>
         <div class="why-stat-desc">The UK needs at least 90,000 new social homes per year — fewer than 10,000 are currently delivered.</div>
       </div>
       <div class="why-stat-item">
-        <div class="why-stat-number">8 yrs</div>
+        <div class="why-stat-number" data-prefix="" data-target="8" data-suffix=" yrs">8 yrs</div>
         <div class="why-stat-label">Average wait in high-demand areas</div>
         <div class="why-stat-desc">Families in London and the South East wait an average of 8 years for a social home.</div>
       </div>
@@ -304,6 +304,27 @@
   <script>
     function openModal() { document.getElementById('opp-modal').classList.add('open'); }
     function closeModal() { document.getElementById('opp-modal').classList.remove('open'); }
+
+    const statEls = document.querySelectorAll('.why-stat-number[data-target]');
+    const countUp = (el) => {
+      const target = parseFloat(el.dataset.target);
+      const decimals = parseInt(el.dataset.decimals || '0');
+      const prefix = el.dataset.prefix || '';
+      const suffix = el.dataset.suffix || '';
+      const duration = 1800;
+      const start = performance.now();
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = prefix + (target * ease).toFixed(decimals) + suffix;
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { countUp(e.target); observer.unobserve(e.target); } });
+    }, { threshold: 0.3 });
+    statEls.forEach(el => observer.observe(el));
   </script>
 
 </body>
