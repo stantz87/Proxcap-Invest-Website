@@ -304,6 +304,8 @@
   <script>
     function openModal() { document.getElementById('opp-modal').classList.add('open'); }
     function closeModal() { document.getElementById('opp-modal').classList.remove('open'); }
+    function toggleMobileMenu() { document.getElementById('nav-mobile-menu').classList.toggle('open'); }
+    function closeMobileMenu() { document.getElementById('nav-mobile-menu').classList.remove('open'); }
 
     const statEls = document.querySelectorAll('.why-stat-number[data-target]');
     const countUp = (el) => {
